@@ -1,4 +1,4 @@
-// Contains the App Heading
+// The App Heading
 
 const AppHeader = () => {
 
