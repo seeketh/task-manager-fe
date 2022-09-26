@@ -1,18 +1,26 @@
-import { useSelector } from "react-redux";
-import { AppHeader, AuthBar, TaskInput, TaskList, Auth } from "./components/";
+import { useDispatch, useSelector } from "react-redux";
+import { AppHeader, AuthBar, TaskInput, TaskList, Auth, Spinner } from "./components/";
 
 // The App
 const App = () => {
 
-    const { auth } = useSelector(store => store);
+    /*const { auth } = useSelector(store => store);
+    const dispatch = useDispatch();
+    // console.log(dispatch);
 
     if (!auth.isAuthenticated) {
-        return (
-            <div className="h-screen bg-gray-200">
-                <Auth />
-            </div>
-        );
-    }
+        if (!auth.isLoading) {
+            return (
+                <Auth errorMsg={ auth.errorMsg }/>
+            );
+        } else {
+            return (
+                <div class="h-screen bg-gray-100">
+                    <Spinner />
+                </div>
+            );
+        }
+    }*/
 
     return (
         <div className="app-container">

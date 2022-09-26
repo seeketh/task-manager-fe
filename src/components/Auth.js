@@ -1,7 +1,7 @@
 import { LockClosedIcon, QueueList } from '../icons/heroIcons/auth';
 
 // Login / Register Dialog
-const Auth = () => {
+const Auth = ({ errorMsg }) => {
 
     return (
 
@@ -14,7 +14,7 @@ const Auth = () => {
                     <span className="italic text-lg text-red-400">TASK MANAGER</span>
                 </div>
                 <h2 className="mt-6 text-center text-3xl tracking-tight text-gray-400">
-                Sign in to your account
+                { errorMsg ? <span className="text-red-300 text-xl">{ errorMsg }</span> : "Sign in to your account" }
                 </h2>
             </div>
             <form className="mt-8 space-y-6" action="#" method="POST">
@@ -31,7 +31,7 @@ const Auth = () => {
                         autoComplete="email"
                         required
                         className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#24478f]/30 focus:outline-none focus:ring-[#24478f]/30 sm:text-sm"
-                        placeholder="Email address"
+                        placeholder="Email"
                         />
                     </div>
                 <div>

@@ -2,6 +2,7 @@
 
 export { Task } from './Task';
 export { Auth } from './Auth';
+export { Spinner } from './Spinner';
 export { AuthBar } from './AuthBar';
 export { TaskList } from './TaskList';
 export { TaskInput } from './TaskInput';
