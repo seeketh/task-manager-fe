@@ -1,16 +1,22 @@
 // Manages Task listing and paging
 
+import { Fragment } from "react";
 import { Task } from "./Task";
 import { TaskListFooter } from "./TaskListFooter";
 
 const TaskList = () => {
 
     return (
-
-        <div className="task-list-container">
-            <Task />
+        <Fragment>
+            <div className="flex flex-col items-center justify-center w-full">
+                <Task />
+                <Task /> 
+                <Task /> 
+                <Task />   
+            </div>
             <TaskListFooter />
-        </div>
+        </Fragment>
+
 
     );
 }

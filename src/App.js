@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppHeader, AuthBar, TaskInput, TaskList, Auth, Spinner } from "./components/";
 
 // The App
 const App = () => {
+
+    const [tasks, setTasks] = useState([]);
 
     /*const { auth } = useSelector(store => store);
     const dispatch = useDispatch();
@@ -25,7 +28,7 @@ const App = () => {
     return (
         <div className="app-container">
             <AuthBar />
-            <AppHeader />
+            {/*<AppHeader />*/}
             <TaskInput />
             <TaskList />
         </div>
