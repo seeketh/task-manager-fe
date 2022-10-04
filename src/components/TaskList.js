@@ -12,7 +12,8 @@ const TaskList = () => {
                 <Task />
                 <Task /> 
                 <Task /> 
-                <Task />   
+                <Task />
+                <Task />  
             </div>
             <TaskListFooter />
         </Fragment>
