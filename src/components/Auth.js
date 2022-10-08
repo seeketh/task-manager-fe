@@ -1,11 +1,35 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { LockClosedIcon, QueueList } from '../icons/heroIcons/auth';
+import { login, setErrorMsg } from '../redux/features/auth/authSlice';
 
 // Login / Register Dialog
-const Auth = ({ errorMsg }) => {
+const Auth = () => {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState('');
+    const { auth } = useSelector(store => store);
+    const dispatch = useDispatch();
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if ((email.length < 9) || (password < 5)) {
+            dispatch(setErrorMsg("Email or Password is invalid"));
+        } else {
+            dispatch(login({email, password}));
+        }
+    }
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+    }
+
+    const handlePassword = (e) => {
+        setPassword(e.target.value);
+    }
 
     return (
 
-        <>
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
             <div>
@@ -14,7 +38,7 @@ const Auth = ({ errorMsg }) => {
                     <span className="italic text-lg text-red-400">TASK MANAGER</span>
                 </div>
                 <h2 className="mt-6 text-center text-3xl tracking-tight text-gray-400">
-                { errorMsg ? <span className="text-red-300 text-xl">{ errorMsg }</span> : "Sign in to your account" }
+                { auth.errorMsg ? <span className="text-red-300 text-xl">{ auth.errorMsg }</span> : "Sign in to your account" }
                 </h2>
             </div>
             <form className="mt-8 space-y-6" action="#" method="POST">
@@ -28,6 +52,7 @@ const Auth = ({ errorMsg }) => {
                         id="email-address"
                         name="email"
                         type="email"
+                        onChange={handleEmail}
                         autoComplete="email"
                         required
                         className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#24478f]/30 focus:outline-none focus:ring-[#24478f]/30 sm:text-sm"
@@ -42,6 +67,7 @@ const Auth = ({ errorMsg }) => {
                     id="password"
                     name="password"
                     type="password"
+                    onChange={handlePassword}
                     autoComplete="current-password"
                     required
                     className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#24478f]/30 focus:outline-none focus:ring-[#24478f]/30 sm:text-sm"
@@ -52,6 +78,7 @@ const Auth = ({ errorMsg }) => {
                 <div>
                     <button
                         type="submit"
+                        onClick={handleLogin}
                         className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#24478f]/80 py-2 px-4 text-sm font-medium text-gray-300 hover:bg-[#24478f]/90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -63,8 +90,6 @@ const Auth = ({ errorMsg }) => {
             </form>
             </div>
         </div>
-        </>
-
     );
 }
 

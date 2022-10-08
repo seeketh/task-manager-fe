@@ -10,10 +10,15 @@ const Task = () => {
         <div
             className="group flex justify-between items-center sm:w-3/4 lg:w-1/2 w-full bg-gray-100 rounded h-20 p-1 mb-4 drop-shadow-md"
         >
-            <div className="">
-                The task?
+            <div className="w-full h-full pr-2 flex flex-col">
+                <div className="text-slate-600 text-lg">
+                    Walk the dog
+                </div>
+                <div className="text-slate-400">
+                    Completed
+                </div>
             </div>
-            <div className="invisible group-hover:visible flex flex-col justify-center items-center">
+            <div className="invisible group-hover:visible flex flex-col justify-center items-center text-slate-700">
                 <CheckCircle />
                 <PencilSquare />
                 <Trash />
