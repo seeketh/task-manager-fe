@@ -4,7 +4,7 @@
 import { CheckCircle, PencilSquare, Trash } from '../icons/heroIcons/task';
 
 
-const Task = () => {
+const Task = ({task, pos}) => {
 
     return (
         <div
@@ -12,10 +12,10 @@ const Task = () => {
         >
             <div className="w-full h-full pr-2 flex flex-col">
                 <div className="text-slate-600 text-lg">
-                    Walk the dog
+                    {task.task}
                 </div>
                 <div className="text-slate-400">
-                    Completed
+                    {task.completed ? "Completed" : "Pending"}
                 </div>
             </div>
             <div className="invisible group-hover:visible flex flex-col justify-center items-center text-slate-700">

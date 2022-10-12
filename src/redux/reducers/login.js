@@ -7,8 +7,14 @@ export const loginPending = (state) => {
 export const loginFulfilled = (state, action) => {
     console.log(action.payload);
     state.isLoading = false;
-    state.isAuthenticated = true;
-    state.errorMsg = "";
+    if (action.payload.success) {
+        state.isAuthenticated = true;
+        state.name = action.payload.name;
+        state.errorMsg = "";
+    } else {
+        state.errorMsg = action.payload.msg;
+    }
+
 }
 
 // effect when login is rejected

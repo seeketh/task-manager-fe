@@ -7,7 +7,7 @@ import { login, setErrorMsg } from '../redux/features/auth/authSlice';
 const Auth = () => {
 
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState("");
     const { auth } = useSelector(store => store);
     const dispatch = useDispatch();
 
@@ -46,32 +46,32 @@ const Auth = () => {
                 <div className="-space-y-px rounded-md shadow-sm">
                     <div>
                         <label htmlFor="email-address" className="sr-only">
-                        Email address
+                            Email address
                         </label>
                         <input
-                        id="email-address"
-                        name="email"
-                        type="email"
-                        onChange={handleEmail}
-                        autoComplete="email"
-                        required
-                        className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#24478f]/30 focus:outline-none focus:ring-[#24478f]/30 sm:text-sm"
-                        placeholder="Email"
+                            id="email-address"
+                            name="email"
+                            type="email"
+                            onChange={handleEmail}
+                            autoComplete="email"
+                            required
+                            className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#24478f]/30 focus:outline-none focus:ring-[#24478f]/30 sm:text-sm"
+                            placeholder="Email"
                         />
                     </div>
                 <div>
                     <label htmlFor="password" className="sr-only">
-                    Password
+                        Password
                     </label>
                     <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    onChange={handlePassword}
-                    autoComplete="current-password"
-                    required
-                    className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#24478f]/30 focus:outline-none focus:ring-[#24478f]/30 sm:text-sm"
-                    placeholder="Password"
+                        id="password"
+                        name="password"
+                        type="password"
+                        onChange={handlePassword}
+                        autoComplete="current-password"
+                        required
+                        className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#24478f]/30 focus:outline-none focus:ring-[#24478f]/30 sm:text-sm"
+                        placeholder="Password"
                     />
                 </div>
                 </div>

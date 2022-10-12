@@ -10,7 +10,7 @@ import { initialAuthState } from './authState';
 
 const initialState = initialAuthState;
 
-const login = createAsyncThunk('auth/login', async ({email, password}, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async ({email, password}, thunkAPI) => {
     try {
         const res = await axios.post(LOGIN_URL, {email, password});
         return res.data;
