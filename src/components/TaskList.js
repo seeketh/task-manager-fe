@@ -7,7 +7,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 // import { setErrorMsg } from "../redux/features/auth/authSlice";
 
-const TaskList = () => {
+const TaskList = (props) => {
     const [tasks, setTasks] = useState([]);
     const dispatch = useDispatch();
     const { auth } = useSelector(store => store);
@@ -20,11 +20,12 @@ const TaskList = () => {
                 setTasks(res.data);
                 console.log(res);
             } catch(error) {
+                // TODO: work on dispatching this error
                 console.log(error);
             }
         }
         getAllTasks();
-    }, []);
+    }, [props.version]);
 
     if (auth.setErrorMsg) {
         <Auth />

@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { AuthBar, TaskInput, TaskList, Auth, Spinner } from "./components/";
 
@@ -6,6 +6,8 @@ import { AuthBar, TaskInput, TaskList, Auth, Spinner } from "./components/";
 const App = () => {
 
     const { auth } = useSelector(store => store);
+    // Local Tasks version. Changes to this requeires tasks reloads from API
+    const [tasksVersion, setTasksVersion] = useState(0);
 
     if (!auth.isAuthenticated) {
         if (!auth.isLoading) {
@@ -23,8 +25,8 @@ const App = () => {
         return (
             <div className="">
                 <AuthBar />
-                <TaskInput />
-                <TaskList />
+                <TaskInput updateVersion={setTasksVersion} version={tasksVersion} />
+                <TaskList version={tasksVersion} />
             </div>
     
         );
