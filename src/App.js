@@ -6,7 +6,7 @@ import { AuthBar, TaskInput, TaskList, Auth, Spinner } from "./components/";
 const App = () => {
 
     const { auth } = useSelector(store => store);
-    // Local Tasks version. Changes to this requeires tasks reloads from API
+    // Local Tasks version. Changing this will cause tasks reloads.
     const [tasksVersion, setTasksVersion] = useState(0);
 
     if (!auth.isAuthenticated) {

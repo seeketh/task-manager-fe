@@ -25,8 +25,8 @@ const TaskInput = (props) => {
                 console.log(res)
                 if (res.data.success) {
                     setNewTask("");
-                    // Trigger tasks version update for reloades
-                    props.updateVersion(props.version + 1);
+                    // Trigger tasks version update for reloads
+                    props.updateVersion(prevVersion => prevVersion + 1);
                     
                 } else {
                     // dispatch failure reason

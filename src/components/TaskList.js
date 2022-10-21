@@ -2,13 +2,15 @@
 
 import { useState, useEffect, Fragment } from "react";
 import { Task, TaskListFooter, NoTask, Auth } from "./index";
-import { ALL_TASKS_URL } from "../config/constants";
+import { ALL_TASKS_URL, TASKS_LIMIT_COUNT } from "../config/constants";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 // import { setErrorMsg } from "../redux/features/auth/authSlice";
 
-const TaskList = (props) => {
-    const [tasks, setTasks] = useState([]);
+const TaskList = ({version}) => {
+    const [tasks, setTasks] = useState([]); // All tasks for the given page.
+    const [tasksCount, setTasksCount] = useState(0); // The number of tasks for this user.
+    const [page, setPage] = useState(1); // Current tasks' page.
     const dispatch = useDispatch();
     const { auth } = useSelector(store => store);
 
@@ -16,8 +18,9 @@ const TaskList = (props) => {
     useEffect(() => {
         async function getAllTasks() {
             try {
-                const res = await axios.get(ALL_TASKS_URL, {withCredentials: true});
-                setTasks(res.data);
+                const res = await axios.get(`${ALL_TASKS_URL}/${page}/${TASKS_LIMIT_COUNT}`, {withCredentials: true});
+                setTasks(res.data.tasks);
+                setTasksCount(res.data.count);
                 console.log(res);
             } catch(error) {
                 // TODO: work on dispatching this error
@@ -25,7 +28,7 @@ const TaskList = (props) => {
             }
         }
         getAllTasks();
-    }, [props.version]);
+    }, [version, page]);
 
     if (auth.setErrorMsg) {
         <Auth />
@@ -45,7 +48,7 @@ const TaskList = (props) => {
                 <div className="flex flex-col items-center justify-center w-full">
                     {userTasks}
                 </div>
-                <TaskListFooter />
+                <TaskListFooter currentPage={page} updatePage={setPage} userTasksCount={tasksCount} pageTasksCount={tasks.length} />
             </Fragment>
         );
         
