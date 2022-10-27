@@ -2,9 +2,43 @@
 // Content: Task name/description, statud. TODO: due date, 
 // Behavior: Edit, Delete, mark complete. TODO: drag to reorder position
 import { CheckCircle, PencilSquare, Trash } from '../icons/heroIcons/task';
+import { ALL_TASKS_URL as ACTION_URL } from '../config/constants';
+import axios from 'axios';
+ 
+const Task = ({task, position, updateVersion}) => {
+    // Function to handle marking of task completion
+    const handleComplete = async (taskId, currentStatus) => {
+        const changePayload = {
+            completed: ! currentStatus
+        };
 
+        const completeURL = `${ACTION_URL}/${taskId}`;
 
-const Task = ({task, pos}) => {
+        try {
+            const res = await axios.patch(completeURL, changePayload);
+            updateVersion(currentVersion => currentVersion + 1);
+            console.log(res);
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+    // Function to handle task editing
+    const handleEdit= (taskId, changePayload) => {
+
+    }
+    // Function to handle task deletion
+    const handleDelete = async (taskId) => {
+        const deleteURL = `${ACTION_URL}/${taskId}`;
+
+        try {
+            const res = await axios.delete(deleteURL);
+            updateVersion(currentVersion => currentVersion + 1);
+            console.log(res);
+        } catch(error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div
@@ -19,9 +53,15 @@ const Task = ({task, pos}) => {
                 </div>
             </div>
             <div className="invisible group-hover:visible flex flex-col justify-center items-center text-slate-700">
-                <CheckCircle />
-                <PencilSquare />
-                <Trash />
+                <div onClick={() => { handleComplete(task._id, task.completed) }}>
+                    <CheckCircle />
+                </div>
+                <div>
+                    <PencilSquare />
+                </div>
+                <div onClick={() => { handleDelete(task._id) }}>
+                    <Trash />
+                </div>
             </div>
             
         </div>

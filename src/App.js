@@ -26,7 +26,7 @@ const App = () => {
             <div className="">
                 <AuthBar />
                 <TaskInput updateVersion={setTasksVersion} version={tasksVersion} />
-                <TaskList version={tasksVersion} />
+                <TaskList updateVersion={setTasksVersion} version={tasksVersion} />
             </div>
     
         );

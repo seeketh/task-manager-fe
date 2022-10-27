@@ -7,14 +7,14 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 // import { setErrorMsg } from "../redux/features/auth/authSlice";
 
-const TaskList = ({version}) => {
+const TaskList = ({version, updateVersion}) => {
     const [tasks, setTasks] = useState([]); // All tasks for the given page.
     const [tasksCount, setTasksCount] = useState(0); // The number of tasks for this user.
     const [page, setPage] = useState(1); // Current tasks' page.
     const dispatch = useDispatch();
     const { auth } = useSelector(store => store);
 
-    // OnMount load all tasks
+    // Load Tasks whenever version of a given task or tasks' page change.
     useEffect(() => {
         async function getAllTasks() {
             try {
@@ -33,7 +33,6 @@ const TaskList = ({version}) => {
     if (auth.setErrorMsg) {
         <Auth />
     } else if (!tasks) {
-        // userTasks.push(<NoTask />);
         return (
             <div className="flex flex-col items-center justify-center w-full">
                 <NoTask />
@@ -41,7 +40,9 @@ const TaskList = ({version}) => {
         );
     } else {
         const userTasks = [];
-        tasks.forEach((task, index) => { userTasks.push(<Task key={task._id} task={task} pos={index} />); });
+        tasks.forEach((task, index) => {
+            userTasks.push(<Task key={task._id} task={task} position={index} updateVersion={updateVersion} />); 
+        });
    
         return (
             <Fragment>
@@ -53,8 +54,6 @@ const TaskList = ({version}) => {
         );
         
     }
-
-
 }
 
 export { TaskList };
