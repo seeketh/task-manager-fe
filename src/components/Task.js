@@ -5,14 +5,18 @@ import { CheckCircle, PencilSquare, Trash } from '../icons/heroIcons/task';
 import { ALL_TASKS_URL as ACTION_URL } from '../config/constants';
 import axios from 'axios';
  
-const Task = ({task, position, updateVersion}) => {
+const Task = ({task, position, updateVersion, setEditMode, setTaskToEdit}) => {
     // Function to handle marking of task completion
     const handleComplete = async (taskId, currentStatus) => {
         const changePayload = {
-            completed: ! currentStatus
+            completed: !currentStatus
         };
 
+        console.log(changePayload);
+
         const completeURL = `${ACTION_URL}/${taskId}`;
+        setEditMode(false);
+        setTaskToEdit({});
 
         try {
             const res = await axios.patch(completeURL, changePayload);
@@ -24,12 +28,18 @@ const Task = ({task, position, updateVersion}) => {
 
     }
     // Function to handle task editing
-    const handleEdit= (taskId, changePayload) => {
-
+    const handleEdit= (taskId, taskText) => {
+        setTaskToEdit({
+            _id: taskId,
+            task: taskText
+        });
+        setEditMode(true);
     }
     // Function to handle task deletion
     const handleDelete = async (taskId) => {
         const deleteURL = `${ACTION_URL}/${taskId}`;
+        setEditMode(false);
+        setTaskToEdit({});
 
         try {
             const res = await axios.delete(deleteURL);
@@ -53,13 +63,13 @@ const Task = ({task, position, updateVersion}) => {
                 </div>
             </div>
             <div className="invisible group-hover:visible flex flex-col justify-center items-center text-slate-700">
-                <div onClick={() => { handleComplete(task._id, task.completed) }}>
+                <div className="cursor-pointer" onClick={() => { handleComplete(task._id, task.completed) }}>
                     <CheckCircle />
                 </div>
-                <div>
+                <div className="cursor-pointer" onClick={() => { handleEdit(task._id, task.task) }}>
                     <PencilSquare />
                 </div>
-                <div onClick={() => { handleDelete(task._id) }}>
+                <div className="cursor-pointer" onClick={() => { handleDelete(task._id) }}>
                     <Trash />
                 </div>
             </div>

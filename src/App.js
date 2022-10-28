@@ -8,6 +8,10 @@ const App = () => {
     const { auth } = useSelector(store => store);
     // Local Tasks version. Changing this will cause tasks reloads.
     const [tasksVersion, setTasksVersion] = useState(0);
+    // Controll App input mode
+    const [editMode, setEditMode] = useState(false);
+    // Task to edit
+    const [taskToEdit, setTaskToEdit] = useState({});
 
     if (!auth.isAuthenticated) {
         if (!auth.isLoading) {
@@ -25,8 +29,20 @@ const App = () => {
         return (
             <div className="">
                 <AuthBar />
-                <TaskInput updateVersion={setTasksVersion} version={tasksVersion} />
-                <TaskList updateVersion={setTasksVersion} version={tasksVersion} />
+                <TaskInput
+                    updateVersion={setTasksVersion}
+                    version={tasksVersion}
+                    editMode={editMode}
+                    setEditMode={setEditMode}
+                    taskToEdit={taskToEdit}
+                    setTaskToEdit={setTaskToEdit}
+                />
+                <TaskList
+                    updateVersion={setTasksVersion}
+                    version={tasksVersion}
+                    setEditMode={setEditMode}
+                    setTaskToEdit={setTaskToEdit}
+                />
             </div>
     
         );

@@ -7,7 +7,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 // import { setErrorMsg } from "../redux/features/auth/authSlice";
 
-const TaskList = ({version, updateVersion}) => {
+const TaskList = ({version, updateVersion, setEditMode, setTaskToEdit}) => {
     const [tasks, setTasks] = useState([]); // All tasks for the given page.
     const [tasksCount, setTasksCount] = useState(0); // The number of tasks for this user.
     const [page, setPage] = useState(1); // Current tasks' page.
@@ -41,7 +41,14 @@ const TaskList = ({version, updateVersion}) => {
     } else {
         const userTasks = [];
         tasks.forEach((task, index) => {
-            userTasks.push(<Task key={task._id} task={task} position={index} updateVersion={updateVersion} />); 
+            userTasks.push(<Task
+                key={task._id}
+                task={task}
+                position={index}
+                updateVersion={updateVersion}
+                setEditMode={setEditMode}
+                setTaskToEdit={setTaskToEdit}
+            />); 
         });
    
         return (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Add } from "../icons/heroIcons/taskInput";
 import { ALL_TASKS_URL } from "../config/constants";
 import axios from "axios";
@@ -7,6 +7,12 @@ import axios from "axios";
 // Handles new Task input
 const TaskInput = (props) => {
     const [newTask, setNewTask] = useState("");
+
+    useEffect(() => {
+      if(props.editMode) {
+        setNewTask(props.taskToEdit.task);
+      }
+    }, [props.editMode, props.taskToEdit])
 
     const handleInput = (e) => {
         setNewTask(e.target.value);
@@ -21,10 +27,18 @@ const TaskInput = (props) => {
         } else {
             // create task
             try {
-                const res = await axios.post(ALL_TASKS_URL, {task: newTask}, {withCredentials: true});
+                let res;
+                if (!props.editMode) {
+                    res = await axios.post(ALL_TASKS_URL, {task: newTask}, {withCredentials: true});
+                } else {
+                    res = await axios.patch(`${ALL_TASKS_URL}/${props.taskToEdit._id}`, {task: newTask}, {withCredentials: true}); 
+                }
                 console.log(res)
+                // Make sure we dont get stuck in task edit mode
+                props.setEditMode(false);
                 if (res.data.success) {
                     setNewTask("");
+                    props.setTaskToEdit({});
                     // Trigger tasks version update for reloads
                     props.updateVersion(prevVersion => prevVersion + 1);
                     
