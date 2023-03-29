@@ -1,4 +1,4 @@
-// Hero icons for TaskInput componet
+// Hero icon - lock closed
 
 const LockClosedIcon = () => {
 
