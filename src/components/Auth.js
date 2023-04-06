@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { LockClosedIcon, QueueList } from '../icons/heroIcons/auth';
+// import { LockClosedIcon, QueueList } from '../icons/heroIcons/auth';
+import { LockClosedIcon } from '../icons/heroIcons/auth';
 import { login, setErrorMsg } from '../redux/features/auth/authSlice';
+import logo from '../assets/tama20050.png';
 
 // Login / Register Dialog
 const Auth = () => {
@@ -30,14 +32,17 @@ const Auth = () => {
 
     return (
 
-        <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
-            <div>
-                <div className="flex justify-center text-[#24478f]/80">
+            <div className="flex flex-col justify-center items-center">
+                {/*<div className="flex justify-center text-5xl text-[#24478f]/80">
                     <QueueList />
-                    <span className="italic text-lg text-red-400">TASK MANAGER</span>
+                    <span className="italic text-red-400">TASK MANAGER</span>
+                </div>*/}
+                <div className="w-[150px] h-auto">
+                    <img src={logo} alt="TaskManager logo"/>
                 </div>
-                <h2 className="mt-6 text-center text-3xl tracking-tight text-gray-400">
+                <h2 className="mt-2 text-center text-3xl tracking-tight text-gray-400">
                 { auth.errorMsg ? <span className="text-red-300 text-xl">{ auth.errorMsg }</span> : "Sign in to your account" }
                 </h2>
             </div>
@@ -84,7 +89,7 @@ const Auth = () => {
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                             <LockClosedIcon className="h-5 w-5 text-gray-500 group-hover:text-indigo-400" aria-hidden="true" />
                         </span>
-                        Sign in
+                        SIGN IN
                     </button>
                 </div>
             </form>

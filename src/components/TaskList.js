@@ -4,15 +4,18 @@ import { useState, useEffect, Fragment } from "react";
 import { Task, TaskListFooter, NoTask, Auth } from "./index";
 import { ALL_TASKS_URL, TASKS_LIMIT_COUNT } from "../config/constants";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import { setErrorMsg } from "../redux/features/auth/authSlice";
 
 const TaskList = ({version, updateVersion, setEditMode, setTaskToEdit}) => {
     const [tasks, setTasks] = useState([]); // All tasks for the given page.
     const [tasksCount, setTasksCount] = useState(0); // The number of tasks for this user.
     const [page, setPage] = useState(1); // Current tasks' page.
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const { auth } = useSelector(store => store);
+
+    console.log("this is Auth data:", auth);
 
     // Load Tasks whenever version of a given task or tasks' page change.
     useEffect(() => {

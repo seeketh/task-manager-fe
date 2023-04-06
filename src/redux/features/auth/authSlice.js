@@ -12,7 +12,9 @@ const initialState = initialAuthState;
 
 export const login = createAsyncThunk('auth/login', async ({email, password}, thunkAPI) => {
     try {
+        axios.defaults.withCredentials = true;
         const res = await axios.post(LOGIN_URL, {email, password});
+        console.log(res);
         return res.data;
     } catch (error) {
         return thunkAPI.rejectWithValue('login failed');
