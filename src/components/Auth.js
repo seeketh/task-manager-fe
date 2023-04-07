@@ -43,7 +43,7 @@ const Auth = () => {
                     <img src={logo} alt="TaskManager logo"/>
                 </div>
                 <h2 className="mt-2 text-center text-3xl tracking-tight text-gray-400">
-                { auth.errorMsg ? <span className="text-red-300 text-xl">{ auth.errorMsg }</span> : "Sign in to your account" }
+                { auth.errorMsg ? <span className="text-red-300 text-xl">{ auth.errorMsg }</span> : <span className="text-xl">Sign in to your account</span>}
                 </h2>
             </div>
             <form className="mt-8 space-y-6" action="#" method="POST">
